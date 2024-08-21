@@ -15,13 +15,13 @@ class Board:
         self.cell_size = 30
 
     def render(self, screen):
-        colors = {'.': pygame.Color('black'),
-                  '@': pygame.Color('green'),
-                  'b': pygame.Color('blue'),
-                  'p': pygame.Color('purple'),
-                  'w': pygame.Color('white')}
+        colors = {'.': pygame.Color('#802392'),
+                  '@': pygame.Color('#a1ff71'),
+                  'b': pygame.Color('#5560d9'),
+                  'p': pygame.Color('#ea9cc4'),
+                  'w': pygame.Color('#ded4d1')}
 
-        border = pygame.Color('white')
+        border = pygame.Color('#18072a')
 
         for y in range(self.height):
             for x in range(self.width):
@@ -116,7 +116,6 @@ def main():
                     for row in load_level(f'level_{input("Edit level (number of level): ")}').split('\n'):
                         r = [s for s in row]
                         data.append(r)
-                    print(data)
                     board.board = data
 
             if event.type == pygame.MOUSEBUTTONDOWN:
