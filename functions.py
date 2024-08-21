@@ -63,7 +63,7 @@ def place_player(level_data):
 
 def place_blue_blocks(level_data):
     block_len = 1
-    s = '#'
+    s = 'b'
     for i in range(len(level_data)):
         row = level_data[i]
         for j in range(len(row)):
@@ -87,10 +87,8 @@ def place_blue_blocks(level_data):
 
 def place_pink_blocks(level_data):
     block_len = 1
-    s = '%'
+    s = 'p'
     transposed_level_data = transpose(level_data)
-    for row in transposed_level_data:
-        print(''.join(row))
 
     for i in range(len(transposed_level_data)):
         row = transposed_level_data[i]

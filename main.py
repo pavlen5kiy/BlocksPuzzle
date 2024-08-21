@@ -35,7 +35,7 @@ for i in range(len(level_data)):
         curr_s = row[j]
         x = j - 8
         z = 8 - i
-        if curr_s == '&':
+        if curr_s == 'w':
             create_white_block(Vec3(x, 0, z))
 
 if __name__ == '__main__':
