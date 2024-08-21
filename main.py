@@ -1,12 +1,14 @@
+from PIL.ImageOps import scale
 from ursina import *
 from ursina.shaders import *
 
 from classes import *
 from functions import *
+from settings import *
 
 app = Ursina()
 
-window.color = color.hex('#b3daee')
+window.color = BG_COLOR
 
 camera.rotation = (45, 45, 0)
 camera.position = Vec3(-7, 10, -7)
@@ -16,27 +18,67 @@ light = DirectionalLight(shadow_map_resolution=(2048, 2048))
 light.rotation = (45, 65, 0)
 light.position = Vec3(-18, 23, -18)
 
-plane = Entity(model='plane', color=color.hex('#802392'),
-               position=Vec3(0, -0.51, 0), scale=20)
-walls = create_walls()
 
-level_data = load_level('level').split('\n')
+def set_level(level):
+    restart_hint = Text(text='[R] to restart', scale=0.05, origin=(-2.5, 16),
+                        font='Arial Bold.ttf', color=color.black)
+    quit_hint = Text(text='[Q] to quit', scale=0.05, origin=(-3.02, 18),
+                     font='Arial Bold.ttf', color=color.black)
+    level_number = Text(text=f'Level {current_level}', scale=0.05,
+                        origin=(5, -18),
+                        font='Arial Bold.ttf', color=color.black)
 
-player = Player(model='cube', color=color.hex('#a1ff71'),
-                position=place_player(level_data),
-                collider='box', shader=lit_with_shadows_shader)
+    plane = Entity(model='plane', color=WALLS_COLOR,
+                   position=Vec3(0, -0.51, 0), scale=20, shader=SHADER)
+    walls = create_walls()
 
-place_blue_blocks(level_data)
-place_pink_blocks(level_data)
+    level_data = load_level(f'level_{level}').split('\n')
 
-for i in range(len(level_data)):
-    row = level_data[i]
-    for j in range(len(row)):
-        curr_s = row[j]
-        x = j - 8
-        z = 8 - i
-        if curr_s == 'w':
-            create_white_block(Vec3(x, 0, z))
+    player = Player(model='cube', color=PLAYER_COLOR,
+                    position=place_player(level_data),
+                    collider='box', shader=SHADER)
+
+    place_blue_blocks(level_data)
+    place_pink_blocks(level_data)
+
+    for i in range(len(level_data)):
+        row = level_data[i]
+        for j in range(len(row)):
+            curr_s = row[j]
+            x = j - 8
+            z = 8 - i
+            if curr_s == 'w':
+                create_white_block(Vec3(x, 0, z))
+
+
+def input(key):
+    global current_level
+    if key == 'r':
+        scene.clear()
+        set_level(current_level)
+    if key == 'q':
+        quit()
+
+
+def update():
+    global current_level
+    hit_info = boxcast(Vec3(0, 0, -10), Vec3(0, 0, 1),
+                       distance=1, debug=True,
+                       thickness=(1, 1))
+    if hit_info.hit:
+        if current_level < MAX_LEVEL:
+            scene.clear()
+            current_level += 1
+            set_level(current_level)
+        else:
+            print('Hey, you\n'
+                  'You won dude, ya know\n'
+                  'That game is kinda simple btw\n'
+                  'Nothing do be proud of')
+            quit()
+
 
 if __name__ == '__main__':
+    current_level = 1
+    set_level(current_level)
     app.run()

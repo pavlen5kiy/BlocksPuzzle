@@ -1,48 +1,50 @@
+from simplepbr.shaders import shaders
 from ursina import *
 from ursina.shaders import *
 
-
 from classes import *
+from settings import *
 
 
 def create_blue_block(position, scale_x=1, scale_z=1):
-    obstacle = BlueBlock(model='cube', color=color.hex('#5560d9'),
-                            position=position, collider='box', scale_x=scale_x,
-                            scale_z=scale_z)
+    obstacle = BlueBlock(model='cube', color=BLUE_BLOCK_COLOR,
+                         position=position, collider='box', scale_x=scale_x,
+                         scale_z=scale_z, shader=SHADER)
     return obstacle
 
 
 def create_pink_block(position, scale_x=1, scale_z=1):
-    obstacle = PinkBlock(model='cube', color=color.hex('#ea9cc4'),
-                            position=position, collider='box', scale_x=scale_x,
-                            scale_z=scale_z)
+    obstacle = PinkBlock(model='cube', color=PINK_BLOCK_COLOR,
+                         position=position, collider='box', scale_x=scale_x,
+                         scale_z=scale_z, shader=SHADER)
     return obstacle
 
 
 def create_white_block(position, scale_x=1, scale_z=1):
-    obstacle = WhiteBlock(model='cube', color=color.hex('#ded4d1'),
+    obstacle = WhiteBlock(model='cube', color=WHITE_BLOCK_COLOR,
                           position=position, collider='box', scale_x=scale_x,
-                          scale_z=scale_z)
+                          scale_z=scale_z, shader=SHADER)
     return obstacle
 
 
 def create_walls():
-    walls = [Entity(model='cube', color=color.hex('#802392'),
+    walls = [Entity(model='cube', color=WALLS_COLOR,
                     position=Vec3(0, 0, 9.5), scale_x=20, collider='box',
-                    shader=lit_with_shadows_shader),
-             Entity(model='cube', color=color.hex('#802392'),
+                    shader=SHADER),
+             Entity(model='cube', color=WALLS_COLOR,
                     position=Vec3(-6, 0, -9.5), scale_x=8, collider='box',
-                    shader=lit_with_shadows_shader),
-             Entity(model='cube', color=color.hex('#802392'),
+                    shader=SHADER),
+             Entity(model='cube', color=WALLS_COLOR,
                     position=Vec3(6, 0, -9.5), scale_x=8, collider='box',
-                    shader=lit_with_shadows_shader),
-             Entity(model='cube', color=color.hex('#802392'),
+                    shader=SHADER),
+             Entity(model='cube', color=WALLS_COLOR,
                     position=Vec3(-9.5, 0, 0), scale_z=20, collider='box',
-                    shader=lit_with_shadows_shader),
-             Entity(model='cube', color=color.hex('#802392'),
+                    shader=SHADER),
+             Entity(model='cube', color=WALLS_COLOR,
                     position=Vec3(9.5, 0, 0), scale_z=20, collider='box',
-                    shader=lit_with_shadows_shader)]
+                    shader=SHADER)]
     return walls
+
 
 def load_level(filename):
     with open(f'levels/{filename}.txt', mode='r') as f:
@@ -109,6 +111,7 @@ def place_pink_blocks(level_data):
                     create_pink_block(Vec3(x, 0, z + offset), 1, block_len)
 
                 block_len = 1
+
 
 def transpose(matrix):
     res = []
