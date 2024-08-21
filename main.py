@@ -79,6 +79,6 @@ def update():
 
 
 if __name__ == '__main__':
-    current_level = 6
+    current_level = 4
     set_level(current_level)
     app.run()
