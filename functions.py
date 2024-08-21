@@ -4,22 +4,22 @@ from ursina.shaders import *
 from classes import *
 
 
-def create_z_movable_obst(position, scale_x=1, scale_z=1):
-    obstacle = ZMovableObst(model='cube', color=color.hex('#5560d9'),
+def create_blue_block(position, scale_x=1, scale_z=1):
+    obstacle = BlueBlock(model='cube', color=color.hex('#5560d9'),
                             position=position, collider='box', scale_x=scale_x,
                             scale_z=scale_z)
     return obstacle
 
 
-def create_x_movable_obst(position, scale_x=1, scale_z=1):
-    obstacle = XMovableObst(model='cube', color=color.hex('#ea9cc4'),
+def create_pink_block(position, scale_x=1, scale_z=1):
+    obstacle = PinkBlock(model='cube', color=color.hex('#ea9cc4'),
                             position=position, collider='box', scale_x=scale_x,
                             scale_z=scale_z)
     return obstacle
 
 
-def create_static_obst(position, scale_x=1, scale_z=1):
-    obstacle = StaticObst(model='cube', color=color.hex('#ded4d1'),
+def create_white_block(position, scale_x=1, scale_z=1):
+    obstacle = WhiteBlock(model='cube', color=color.hex('#ded4d1'),
                           position=position, collider='box', scale_x=scale_x,
                           scale_z=scale_z)
     return obstacle
@@ -42,3 +42,7 @@ def create_walls():
                     position=Vec3(9.5, 0, 0), scale_z=20, collider='box',
                     shader=lit_with_shadows_shader)]
     return walls
+
+def load_level(filename):
+    with open(f'levels/{filename}.txt', mode='r') as f:
+        return f.read()

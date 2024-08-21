@@ -16,7 +16,7 @@ class Player(Entity):
             self.position += self.direction * SPEED * time.dt
 
 
-class ZMovableObst(Entity):
+class BlueBlock(Entity):
     def update(self):
         self.direction = Vec3(
             self.forward * (held_keys['w'] - held_keys['s']) * 0
@@ -31,7 +31,7 @@ class ZMovableObst(Entity):
             self.position += self.direction * SPEED * time.dt
 
 
-class XMovableObst(Entity):
+class PinkBlock(Entity):
     def update(self):
         self.direction = Vec3(
             self.forward * (held_keys['w'] - held_keys['s'])
@@ -45,6 +45,6 @@ class XMovableObst(Entity):
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
-
-class StaticObst(Entity):
+# white blocks are static
+class WhiteBlock(Entity):
     pass

@@ -1,4 +1,3 @@
-map = [['_'] * 17] * 17
+from functions import load_level
 
-for row in map:
-    print(''.join(row))
+level = load_level('level').split('\n')

@@ -24,17 +24,46 @@ plane = Entity(model='plane', color=color.hex('#802392'),
                position=Vec3(0, -0.51, 0), scale=20)
 walls = create_walls()
 
-obstacles = [create_z_movable_obst(Vec3(0, 0, 6), 7, 1),
-             create_z_movable_obst(Vec3(4, 0, -2), 5, 1),
-             create_z_movable_obst(Vec3(-5, 0, -4), 4, 1),
-             create_z_movable_obst(Vec3(1, 0, -7), 6, 1),
-             create_x_movable_obst(Vec3(5, 0, 5), 1, 6),
-             create_x_movable_obst(Vec3(3, 0, 3), 1, 3),
-             create_x_movable_obst(Vec3(2, 0, -4), 1, 5),
-             create_x_movable_obst(Vec3(-4, 0, -6), 1, 3),
-             create_x_movable_obst(Vec3(5, 0, -5), 1, 6),
-             create_x_movable_obst(Vec3(-8, 0, 2), 1, 6)
-             ]
+level_data = load_level('level').split('\n')
+
+for s in ['@', '#', '%', '&']:
+    block_len = 1
+    for i in range(len(level_data)):
+        row = level_data[i]
+        for j in range(len(row)):
+
+            x = j - 8
+            z = 8 - i
+            curr_s = row[j]
+            print(curr_s, s)
+            offset = 0.5 * (block_len - 1)
+
+            if s == '#':
+                prev_s = row[j - 1] if j > 0 else ''
+                next_s = row[j + 1] if j < 16 else ''
+            elif s == '%':
+                prev_s = level_data[i - 1][j] if i > 0 else ''
+                next_s = level_data[i + 1][j] if i < 16 else ''
+            else:
+                next_s = ''
+            if curr_s == next_s:
+                block_len += 1
+            else:
+                if s == '@':
+                    if curr_s == '@':
+                        player.position = Vec3(x, 0, z)
+                elif s == '#':
+                    if curr_s == '#':
+                        create_blue_block(Vec3(x - offset, 0, z), block_len)
+                elif s == '%':
+                    if curr_s == '%':
+                        create_pink_block(Vec3(x, 0, z - offset), 1, block_len)
+                elif s == '&':
+                    if curr_s == '&':
+                        create_white_block(Vec3(x, 0, z))
+
+                block_len = 1
+
 
 if __name__ == '__main__':
     app.run()
