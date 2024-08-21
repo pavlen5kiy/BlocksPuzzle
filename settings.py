@@ -1,1 +1,1 @@
-SPEED = 10
+SPEED = 15

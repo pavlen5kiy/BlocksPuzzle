@@ -26,7 +26,7 @@ class ZMovableObst(Entity):
         origin = self.world_position
         hit_info = boxcast(origin, self.direction, ignore=(self,),
                            distance=0.55 * self.scale_x, debug=False,
-                           thickness=(1, 1))
+                           thickness=(1 * self.scale_z, 1))
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
@@ -40,8 +40,8 @@ class XMovableObst(Entity):
 
         origin = self.world_position
         hit_info = boxcast(origin, self.direction, ignore=(self,),
-                           distance=0.55 * self.scale_x, debug=False,
-                           thickness=(1, 1))
+                           distance=0.55 * self.scale_z, debug=False,
+                           thickness=(1 * self.scale_x, 1))
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
