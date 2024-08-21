@@ -12,7 +12,7 @@ class Player(Entity):
 
         origin = self.world_position
         hit_info = boxcast(origin, self.direction, ignore=(self,),
-                           distance=0.75, debug=False, thickness=(1, 1))
+                           distance=0.75, debug=False, thickness=(BOXCAST_THICKNESS, BOXCAST_THICKNESS))
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 

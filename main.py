@@ -62,9 +62,9 @@ def input(key):
 
 def update():
     global current_level
-    hit_info = boxcast(Vec3(0, 0, -10), Vec3(0, 0, 1),
-                       distance=1, debug=True,
-                       thickness=(1, 1))
+    hit_info = boxcast(Vec3(0, 0, -11), Vec3(0, 0, 1),
+                       distance=0.2, debug=True,
+                       thickness=(0.5, 0.5))
     if hit_info.hit:
         if current_level < MAX_LEVEL:
             scene.clear()

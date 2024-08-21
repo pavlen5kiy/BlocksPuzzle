@@ -9,5 +9,5 @@ WALLS_COLOR = color.hex('#802392')
 PLAYER_COLOR = color.hex('#a1ff71')
 BG_COLOR = color.hex('#b3daee')
 SHADER = lit_with_shadows_shader
-MAX_LEVEL = 3
+MAX_LEVEL = 4
 BOXCAST_THICKNESS = 0.9
