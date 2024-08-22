@@ -65,6 +65,7 @@ def main():
     size = 850, 850
 
     screen = pygame.display.set_mode(size)
+    pygame.display.set_caption('Level Editor')
 
     cell_size = 50
     left = 0
@@ -72,7 +73,7 @@ def main():
     width, height = size[0] // cell_size, size[1] // cell_size
 
     board = Board(width, height)
-    default = [['.'] * width] * height
+    default = [['.'] * width for _ in range(height)]
     board.set_view(left, top, cell_size)
 
     running = True
@@ -93,12 +94,15 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     board.board = copy.deepcopy(default)
+                    board.board[0][8] = '@'
                 if event.key == pygame.K_b:
                     mode = 'b'
                 if event.key == pygame.K_p:
                     mode = 'p'
                 if event.key == pygame.K_w:
                     mode = 'w'
+                if event.key == pygame.K_a:
+                    mode = '@'
 
                 if event.key == pygame.K_s:
                     data = ''

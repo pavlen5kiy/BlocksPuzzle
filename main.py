@@ -34,9 +34,10 @@ def set_level(level):
 
     level_data = load_level(f'level_{level}').split('\n')
 
+    pos, scale_z = place_player(level_data)
     player = Player(model='cube', color=PLAYER_COLOR,
-                    position=place_player(level_data),
-                    collider='box', shader=SHADER)
+                    position=pos,
+                    collider='box', shader=SHADER, scale_z=scale_z)
 
     place_blue_blocks(level_data)
     place_pink_blocks(level_data)
@@ -79,6 +80,6 @@ def update():
 
 
 if __name__ == '__main__':
-    current_level = 4
+    current_level = 6
     set_level(current_level)
     app.run()

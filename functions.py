@@ -52,15 +52,31 @@ def load_level(filename):
 
 
 def place_player(level_data):
-    for i in range(len(level_data)):
-        row = level_data[i]
+    block_len = 1
+    s = '@'
+    transposed_level_data = transpose(level_data)
+
+    for i in range(len(transposed_level_data)):
+        row = transposed_level_data[i]
         for j in range(len(row)):
+
+            x = i - 8
+            z = 8 - j
+
             curr_s = row[j]
-            x = j - 8
-            z = 8 - i
-            if curr_s == '@':
-                position = Vec3(x, 0, z)
-                return position
+            next_s = row[j + 1] if j < 16 else ''
+
+            offset = 0.5 * (block_len - 1)
+
+            if curr_s == next_s == s:
+                block_len += 1
+            else:
+                if curr_s == s:
+                    pos = Vec3(x, 0, z + offset)
+                    scale_z = block_len
+                    return pos, scale_z
+
+                block_len = 1
 
 
 def place_blue_blocks(level_data):
