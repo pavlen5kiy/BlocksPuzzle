@@ -28,6 +28,7 @@ def set_level(level):
                         origin=(5, -18),
                         font='fonts/Arial Bold.ttf', color=color.black)
 
+
     plane = Entity(model='plane', color=WALLS_COLOR,
                    position=Vec3(0, -0.51, 0), scale=20, shader=SHADER)
     walls = create_walls()
@@ -72,14 +73,11 @@ def update():
             current_level += 1
             set_level(current_level)
         else:
-            print('Hey, you\n'
-                  'You won dude, ya know\n'
-                  'That game is kinda simple btw\n'
-                  'Nothing do be proud of')
+            print('Final level finished')
             quit()
 
 
 if __name__ == '__main__':
-    current_level = 6
+    current_level = 1
     set_level(current_level)
     app.run()
