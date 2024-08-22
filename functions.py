@@ -72,7 +72,7 @@ def place_player(level_data):
                 block_len += 1
             else:
                 if curr_s == s:
-                    pos = Vec3(x, 0, z + offset)
+                    pos = Vec3(x, 0.03, z + offset)
                     scale_z = block_len
                     return pos, scale_z
 
@@ -98,7 +98,7 @@ def place_blue_blocks(level_data):
                 block_len += 1
             else:
                 if curr_s == s:
-                    create_blue_block(Vec3(x - offset, 0, z), block_len)
+                    create_blue_block(Vec3(x - offset, 0.01, z), block_len)
 
                 block_len = 1
 
@@ -124,7 +124,7 @@ def place_pink_blocks(level_data):
                 block_len += 1
             else:
                 if curr_s == s:
-                    create_pink_block(Vec3(x, 0, z + offset), 1, block_len)
+                    create_pink_block(Vec3(x, 0.02, z + offset), 1, block_len)
 
                 block_len = 1
 

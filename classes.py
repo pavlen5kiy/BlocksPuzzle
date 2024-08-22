@@ -2,7 +2,7 @@ from ursina import *
 
 from settings import *
 
-
+# player moves along z axis
 class Player(Entity):
     def update(self):
         self.direction = Vec3(
@@ -11,10 +11,12 @@ class Player(Entity):
         ).normalized()
 
         origin = self.world_position
+        distance = BOXCAST_DISTANCE * self.scale_z + BOXCAST_DISTANCE_MODIFIER
+        thickness = (BOXCAST_THICKNESS * self.scale_x, BOXCAST_THICKNESS)
+
         hit_info = boxcast(origin, self.direction, ignore=(self,),
-                           distance=0.55 * self.scale_z, debug=False,
-                           thickness=(BOXCAST_THICKNESS * self.scale_x,
-                                      BOXCAST_THICKNESS))
+                           distance=distance, thickness=thickness)
+
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
@@ -28,10 +30,12 @@ class BlueBlock(Entity):
         ).normalized()
 
         origin = self.world_position
+        distance = BOXCAST_DISTANCE * self.scale_x + BOXCAST_DISTANCE_MODIFIER
+        thickness = (BOXCAST_THICKNESS * self.scale_z, BOXCAST_THICKNESS)
+
         hit_info = boxcast(origin, self.direction, ignore=(self,),
-                           distance=0.55 * self.scale_x, debug=False,
-                           thickness=(BOXCAST_THICKNESS * self.scale_z,
-                                      BOXCAST_THICKNESS))
+                           distance=distance, thickness=thickness)
+
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
@@ -45,10 +49,12 @@ class PinkBlock(Entity):
         ).normalized()
 
         origin = self.world_position
+        distance = BOXCAST_DISTANCE * self.scale_z + BOXCAST_DISTANCE_MODIFIER
+        thickness = (BOXCAST_THICKNESS * self.scale_x, BOXCAST_THICKNESS)
+
         hit_info = boxcast(origin, self.direction, ignore=(self,),
-                           distance=0.55 * self.scale_z, debug=False,
-                           thickness=(BOXCAST_THICKNESS * self.scale_x,
-                                      BOXCAST_THICKNESS))
+                           distance=distance, thickness=thickness)
+
         if not hit_info.hit:
             self.position += self.direction * SPEED * time.dt
 
