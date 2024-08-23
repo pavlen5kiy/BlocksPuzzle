@@ -1,4 +1,5 @@
-from PIL.ImageOps import scale
+import random
+
 from ursina import *
 from ursina.application import scenes_folder
 from ursina.shaders import *
@@ -10,7 +11,9 @@ from settings import *
 app = Ursina()
 window.color = BG_COLOR
 
-music = Audio('lofiprekol.mp3', loop=True, autoplay=True)
+songs = ['movement', 'puzzle']
+song = 'movement'
+music = Audio(f'assets/music/{song}.mp3', loop=True, autoplay=True)
 music.volume = 0.5
 music.eternal_setter(True)
 
@@ -24,12 +27,12 @@ light.position = Vec3(-18, 23, -18)
 
 def set_level(level):
     restart_hint = Text(text='[R] to restart', scale=0.05, origin=(-2.5, 16),
-                        font='fonts/Arial Bold.ttf', color=color.black)
+                        font='assets/fonts/Arial Bold.ttf', color=color.black)
     quit_hint = Text(text='[Q] to quit', scale=0.05, origin=(-3.02, 18),
-                     font='fonts/Arial Bold.ttf', color=color.black)
+                     font='assets/fonts/Arial Bold.ttf', color=color.black)
     level_number = Text(text=f'Level {current_level}', scale=0.05,
                         origin=(5, -18),
-                        font='fonts/Arial Bold.ttf', color=color.black)
+                        font='assets/fonts/Arial Bold.ttf', color=color.black)
 
 
     plane = Entity(model='plane', color=WALLS_COLOR,

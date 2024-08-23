@@ -2,6 +2,7 @@ import pygame
 import copy
 
 from functions import load_level
+from settings import theme, COLORS
 
 class Board:
     def __init__(self, width, height):
@@ -15,13 +16,13 @@ class Board:
         self.cell_size = 30
 
     def render(self, screen):
-        colors = {'.': pygame.Color('#802392'),
-                  '@': pygame.Color('#a1ff71'),
-                  'b': pygame.Color('#5560d9'),
-                  'p': pygame.Color('#ea9cc4'),
-                  'w': pygame.Color('#ded4d1')}
+        colors = {'.': pygame.Color(f'#{COLORS["walls"][theme]}'),
+                  '@': pygame.Color(f'#{COLORS["player"][theme]}'),
+                  'b': pygame.Color(f'#{COLORS["blue_block"][theme]}'),
+                  'p': pygame.Color(f'#{COLORS["pink_block"][theme]}'),
+                  'w': pygame.Color(f'#{COLORS["white_block"][theme]}')}
 
-        border = pygame.Color('#18072a')
+        border = pygame.Color('white')
 
         for y in range(self.height):
             for x in range(self.width):
