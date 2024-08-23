@@ -14,7 +14,7 @@ Level editor instructions:
 4. Press following keys to switch to different modes:  
    [B] - blue blocks (must be horizontal)  
    [P] - pink blocks (must be vertical)  
-   [W] - white blocks
+   [W] - white blocks  
    [A] - player (must be vertical, only one can exist)  
 6. [O] - open level (enter level number into console)  
    [S] - save level (enter level number into console)
