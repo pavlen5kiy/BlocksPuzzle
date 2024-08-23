@@ -1,6 +1,10 @@
 [WASD] for controls  
+[R] to restart level  
+[Q] to quit  
+[M] to change song  
+You can change color theme in settings file (**theme** variable, from 0 to 5)  
   
-Create your own level with ***LEVEL EDITOR***  
+You can create your own level with ***LEVEL EDITOR***  
   
 Level editor instructions:  
 1. PLayer always keeps same position
