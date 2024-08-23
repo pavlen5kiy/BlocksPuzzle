@@ -80,6 +80,7 @@ def place_player(level_data):
 
 
 def place_blue_blocks(level_data):
+    res = []
     block_len = 1
     s = 'b'
     for i in range(len(level_data)):
@@ -98,12 +99,14 @@ def place_blue_blocks(level_data):
                 block_len += 1
             else:
                 if curr_s == s:
-                    create_blue_block(Vec3(x - offset, 0.01, z), block_len)
+                    res.append(create_blue_block(Vec3(x - offset, 0.01, z), block_len))
 
                 block_len = 1
+    return res
 
 
 def place_pink_blocks(level_data):
+    res = []
     block_len = 1
     s = 'p'
     transposed_level_data = transpose(level_data)
@@ -124,9 +127,22 @@ def place_pink_blocks(level_data):
                 block_len += 1
             else:
                 if curr_s == s:
-                    create_pink_block(Vec3(x, 0.02, z + offset), 1, block_len)
+                    res.append(create_pink_block(Vec3(x, 0.02, z + offset), 1, block_len))
 
                 block_len = 1
+    return res
+
+def place_white_blocks(level_data):
+    res = []
+    for i in range(len(level_data)):
+        row = level_data[i]
+        for j in range(len(row)):
+            curr_s = row[j]
+            x = j - 8
+            z = 8 - i
+            if curr_s == 'w':
+                res.append(create_white_block(Vec3(x, 0, z)))
+    return res
 
 
 def transpose(matrix):

@@ -1,5 +1,6 @@
 from PIL.ImageOps import scale
 from ursina import *
+from ursina.application import scenes_folder
 from ursina.shaders import *
 
 from classes import *
@@ -7,8 +8,11 @@ from functions import *
 from settings import *
 
 app = Ursina()
-
 window.color = BG_COLOR
+
+music = Audio('lofiprekol.mp3', loop=True, autoplay=True)
+music.volume = 0.5
+music.eternal_setter(True)
 
 camera.rotation = (45, 45, 0)
 camera.position = Vec3(-7, 10, -7)
@@ -17,7 +21,6 @@ camera.orthographic = True
 light = DirectionalLight(shadow_map_resolution=(2048, 2048))
 light.rotation = (45, 65, 0)
 light.position = Vec3(-18, 23, -18)
-
 
 def set_level(level):
     restart_hint = Text(text='[R] to restart', scale=0.05, origin=(-2.5, 16),
@@ -40,17 +43,9 @@ def set_level(level):
                     position=pos,
                     collider='box', shader=SHADER, scale_z=scale_z)
 
-    place_blue_blocks(level_data)
-    place_pink_blocks(level_data)
-
-    for i in range(len(level_data)):
-        row = level_data[i]
-        for j in range(len(row)):
-            curr_s = row[j]
-            x = j - 8
-            z = 8 - i
-            if curr_s == 'w':
-                create_white_block(Vec3(x, 0, z))
+    blue_blocks = place_blue_blocks(level_data)
+    pink_blocks = place_pink_blocks(level_data)
+    white_blocks = place_white_blocks(level_data)
 
 
 def input(key):
