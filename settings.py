@@ -11,7 +11,7 @@ BOXCAST_THICKNESS = 0.9
 BOXCAST_DISTANCE = 0.5
 BOXCAST_DISTANCE_MODIFIER = 0.1
 
-theme = 3
+theme = 2
 COLORS = {
     'white_block': ['ded4d1', 'e3cfb4', 'ffeced', 'dee6c1', 'ebe3cc', 'dfe6e0'],
     'blue_block': ['5560d9', '243d5c', 'a8b5ae', '707a8a', '162944', '7687ab'],

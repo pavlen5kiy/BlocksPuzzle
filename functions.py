@@ -153,3 +153,11 @@ def transpose(matrix):
             row.append(matrix[j][i])
         res.append(row)
     return res
+
+
+def set_music(songs, song):
+    music = Audio(f'assets/music/{songs[song]}.mp3', loop=True, autoplay=True)
+    music.eternal_setter(True)
+    music.volume = 1
+    print(f'Music on: {songs[song]}')
+    return music

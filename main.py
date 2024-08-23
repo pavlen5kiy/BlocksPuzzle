@@ -11,11 +11,9 @@ from settings import *
 app = Ursina()
 window.color = BG_COLOR
 
-songs = ['movement', 'puzzle']
-song = 'movement'
-music = Audio(f'assets/music/{song}.mp3', loop=True, autoplay=True)
-music.volume = 0.5
-music.eternal_setter(True)
+songs = ['movement', 'puzzle', 'blue', 'pink', 'solution']
+song = 0
+music = set_music(songs, song)
 
 camera.rotation = (45, 45, 0)
 camera.position = Vec3(-7, 10, -7)
@@ -53,15 +51,24 @@ def set_level(level):
 
 def input(key):
     global current_level
+    global music
+    global song
+
     if key == 'r':
         scene.clear()
         set_level(current_level)
     if key == 'q':
         quit()
+    if key == 'm':
+        music.stop()
+        song = song + 1 if song < len(songs) - 1 else 0
+        music = set_music(songs, song)
 
 
 def update():
     global current_level
+    global music
+
     hit_info = boxcast(Vec3(0, 0, -11), Vec3(0, 0, 1),
                        distance=0.2, debug=True,
                        thickness=(0.5, 0.5))
